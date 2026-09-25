@@ -4,6 +4,9 @@
     "depends":[
         "purchase"
     ],
-    "data":[],
+    "data":[
+        "security/ir.model.access.csv",
+        "views/purchase_analysis_report.xml"
+    ],
     "installable":True
 }
