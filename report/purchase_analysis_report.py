@@ -7,6 +7,13 @@ class PurchaseAnalysisReport(models.Model):
     
     # fields are grouped in according to tables names
     
+    # res.currency(supporting field for total_amount field)
+    currency_id = fields.Many2one(
+        "res.currency",
+        string="Currency",
+        readonly = True
+    )
+    
     # purchase.order.line
     qty_ordered = fields.Float(
         string="Ordered Quantity",
@@ -28,8 +35,9 @@ class PurchaseAnalysisReport(models.Model):
         readonly = True
     )
     
-    total_amount = fields.Float(
+    total_amount = fields.Monetary(
         string="Amount",
+        currency_field="currency_id",
         readonly = True
     )
     
@@ -108,6 +116,7 @@ class PurchaseAnalysisReport(models.Model):
                     po.date_approve AS ordered_date,
                     po.date_planned AS expected_arrival,
                     po.state AS state,
+                    po.currency_id AS currency_id,
                     
                     pol.product_id AS product,
                     
